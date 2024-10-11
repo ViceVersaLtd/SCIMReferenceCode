@@ -2,15 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-    using System.Net.Http;
-
     public sealed class EventRequest : SystemForCrossDomainIdentityManagementRequest<IEventToken>
     {
         public EventRequest(
-            HttpRequestMessage request,
+            HttpRequest request,
             IEventToken payload,
             string correlationIdentifier,
             IReadOnlyCollection<IExtension> extensions)

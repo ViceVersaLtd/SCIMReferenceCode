@@ -2,13 +2,13 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public abstract class PatchRequest2DeserializingFactory<TPatchRequest, TOperation> :
         ProtocolJsonDeserializingFactory<TPatchRequest>,
         ISchematizedJsonDeserializingFactory<TPatchRequest>

@@ -1,16 +1,16 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Web;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.Specialized;
-    using System.Globalization;
-    using System.Linq;
-    using System.Net;
-    using System.Web;
-    using System.Web.Http;
-
     public sealed class ResourceQuery : IResourceQuery
     {
         private const char SeperatorAttributes = ',';

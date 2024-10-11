@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+
 namespace Microsoft.SCIM
 {
-    using System;
-
     public static class SpecificationVersion
     {
         private static readonly Lazy<Version> VersionOneOhValue =

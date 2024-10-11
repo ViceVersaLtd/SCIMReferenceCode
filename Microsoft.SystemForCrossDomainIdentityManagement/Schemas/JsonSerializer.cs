@@ -2,14 +2,14 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Json;
-
     internal class JsonSerializer : IJsonSerializable
     {
         private static readonly Lazy<DataContractJsonSerializerSettings> SerializerSettings =

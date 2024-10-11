@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+
 namespace Microsoft.SCIM
 {
-    using System;
-
     public sealed class CriticalExceptionNotificationFactory : NotificationFactory<Exception, IExceptionNotification>
     {
         private static readonly Lazy<NotificationFactory<Exception, IExceptionNotification>> Singleton =

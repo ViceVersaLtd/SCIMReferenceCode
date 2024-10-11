@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System.Net;
+using System.Net.Http;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-
     internal abstract class HttpResponseExceptionFactory<T>
     {
         public abstract HttpResponseMessage ProvideMessage(HttpStatusCode statusCode, T content);

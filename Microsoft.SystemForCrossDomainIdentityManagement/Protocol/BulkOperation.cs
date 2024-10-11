@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Net.Http;
+using System.Runtime.Serialization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Net.Http;
-    using System.Runtime.Serialization;
-
     [DataContract]
     public abstract class BulkOperation
     {

@@ -1,13 +1,12 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.SCIM.WebHostSample.Resources;
+
 namespace Microsoft.SCIM.WebHostSample.Provider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Microsoft.SCIM;
-    using Microsoft.SCIM.WebHostSample.Resources;
-
     public class InMemoryProvider : ProviderBase
     {
         private readonly ProviderBase groupProvider;

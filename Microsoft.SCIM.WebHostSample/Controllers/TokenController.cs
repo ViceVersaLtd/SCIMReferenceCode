@@ -2,22 +2,22 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+
 namespace Microsoft.SCIM.WebHostSample.Controllers
 {
-    using System;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Text;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.IdentityModel.Tokens;
-
     // Controller for generating a bearer token for authorization during testing.
     // This is not meant to replace proper Oauth for authentication purposes.
     [Route("scim/token")]
     [ApiController]
     public class TokenController : ControllerBase
     {
-        private readonly IConfiguration configuration;        
+        private readonly IConfiguration configuration;
         private const int defaultTokenExpirationTimeInMins = 120;
 
         public TokenController(IConfiguration Configuration)

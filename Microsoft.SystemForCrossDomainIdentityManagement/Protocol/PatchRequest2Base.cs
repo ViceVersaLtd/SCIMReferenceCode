@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
     [DataContract]
     public abstract class PatchRequest2Base<TOperation> : PatchRequestBase
         where TOperation : PatchOperation2Base

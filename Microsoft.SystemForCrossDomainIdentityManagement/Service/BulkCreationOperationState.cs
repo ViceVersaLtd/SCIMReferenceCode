@@ -1,12 +1,11 @@
-﻿
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+
 namespace Microsoft.SCIM
 {
-    using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-
     internal class BulkCreationOperationState : BulkOperationStateBase<Resource>, IBulkCreationOperationState
     {
         private const string RelativeResourceIdentifierTemplate = "/{0}/{1}";

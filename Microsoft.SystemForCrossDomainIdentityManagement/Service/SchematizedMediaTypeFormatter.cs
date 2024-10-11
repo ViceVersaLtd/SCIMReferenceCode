@@ -1,19 +1,19 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Net;
-    using System.Net.Http;
-    using System.Net.Http.Formatting;
-    using System.Net.Http.Headers;
-    using System.Text;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-
     public sealed class SchematizedMediaTypeFormatter : MediaTypeFormatter
     {
         private static readonly Encoding Encoding = Encoding.UTF8;

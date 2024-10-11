@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Globalization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Globalization;
-
     public abstract class Notification<TPayload> : INotification<TPayload> where TPayload : class
     {
         private const string Template = @"{0:O} {1} {2}

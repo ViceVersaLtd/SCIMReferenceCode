@@ -2,11 +2,11 @@
 //  Copyright (c) Microsoft Corporation.  All rights reserved.
 // ------------------------------------------------------------
 
+using System;
+using System.Configuration;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Configuration;
-
     internal class SystemForCrossDomainIdentityManagementConfigurationSection :
         ConfigurationSection, ISystemForCrossDomainIdentityManagementConfiguration
     {

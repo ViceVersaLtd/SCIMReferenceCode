@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+
 namespace Microsoft.SCIM.WebHostSample.Resources
 {
-    using System;
-
     public class SampleResourceTypes
     {
         public static Core2ResourceType UserResourceType

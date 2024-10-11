@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
+using System.Threading.Tasks;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM.WebHostSample.Provider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-    using Microsoft.SCIM;
-
     public class InMemoryGroupProvider : ProviderBase
     {
         private readonly InMemoryStorage storage;
@@ -127,17 +126,17 @@ namespace Microsoft.SCIM.WebHostSample.Provider
 
                 if (queryFilter.AttributePath.Equals(AttributeNames.DisplayName))
                 {
-                    
+
                     string displayName = queryFilter.ComparisonValue;
                     predicateAnd = predicateAnd.And(p => string.Equals(p.DisplayName, displayName, StringComparison.OrdinalIgnoreCase));
-                  
+
                 }
                 else
                 {
                     throw new NotSupportedException(string.Format(SystemForCrossDomainIdentityManagementServiceResources.ExceptionFilterAttributePathNotSupportedTemplate, queryFilter.AttributePath));
                 }
             }
-            
+
             predicate = predicate.Or(predicateAnd);
             results = this.storage.Groups.Values.Where(predicate.Compile());
 

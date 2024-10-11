@@ -2,13 +2,13 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Globalization;
-    using System.Linq;
-    using System.Net;
-
     internal class Response : IResponse
     {
         private readonly object thisLock = new object();

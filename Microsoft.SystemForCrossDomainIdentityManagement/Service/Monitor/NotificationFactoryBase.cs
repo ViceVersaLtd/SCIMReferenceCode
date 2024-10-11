@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Globalization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Globalization;
-
     public abstract class NotificationFactoryBase<TNotification> : NotificationFactory<string, TNotification>
     {
         public abstract override TNotification CreateNotification(

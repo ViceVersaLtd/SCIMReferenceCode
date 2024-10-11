@@ -1,16 +1,15 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Net;
+using System.Threading.Tasks;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM.WebHostSample.Provider
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-    using Microsoft.SCIM;
-
     public class InMemoryUserProvider : ProviderBase
     {
         private readonly InMemoryStorage storage;
@@ -47,8 +46,8 @@ namespace Microsoft.SCIM.WebHostSample.Provider
             // Update metadata
             DateTime created = DateTime.UtcNow;
             user.Metadata.Created = created;
-            user.Metadata.LastModified = created; 
-            
+            user.Metadata.LastModified = created;
+
             string resourceIdentifier = Guid.NewGuid().ToString();
             resource.Identifier = resourceIdentifier;
             this.storage.Users.Add(resourceIdentifier, user);
@@ -138,7 +137,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                             string userName = andFilter.ComparisonValue;
                             predicateAnd = predicateAnd.And(p => string.Equals(p.UserName, userName, StringComparison.OrdinalIgnoreCase));
 
-                           
+
                         }
 
                         // ExternalId filter
@@ -153,7 +152,7 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                             string externalIdentifier = andFilter.ComparisonValue;
                             predicateAnd = predicateAnd.And(p => string.Equals(p.ExternalIdentifier, externalIdentifier, StringComparison.OrdinalIgnoreCase));
 
-                           
+
                         }
 
                         //Active Filter
@@ -178,14 +177,14 @@ namespace Microsoft.SCIM.WebHostSample.Provider
                                 DateTime comparisonValue = DateTime.Parse(andFilter.ComparisonValue).ToUniversalTime();
                                 predicateAnd = predicateAnd.And(p => p.Metadata.LastModified >= comparisonValue);
 
-                               
+
                             }
                             else if (andFilter.FilterOperator == ComparisonOperator.EqualOrLessThan)
                             {
                                 DateTime comparisonValue = DateTime.Parse(andFilter.ComparisonValue).ToUniversalTime();
                                 predicateAnd = predicateAnd.And(p => p.Metadata.LastModified <= comparisonValue);
 
-                                
+
                             }
                             else
                                 throw new NotSupportedException(

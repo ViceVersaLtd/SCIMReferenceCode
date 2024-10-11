@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-
     public class TrustedJsonFactory : JsonFactory
     {
         public override Dictionary<string, object> Create(string json)

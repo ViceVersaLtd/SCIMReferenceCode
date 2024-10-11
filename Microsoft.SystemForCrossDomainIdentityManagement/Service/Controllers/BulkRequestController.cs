@@ -2,17 +2,17 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-
     [Route(ServiceConstants.RouteBulk)]
     [Authorize]
     [ApiController]
@@ -29,7 +29,7 @@ namespace Microsoft.SCIM
 
             try
             {
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (null == bulkRequest)
                 {
                     throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -50,7 +50,7 @@ namespace Microsoft.SCIM
                 IRequest<BulkRequest2> request2 = new BulkRequest(request, bulkRequest, correlationIdentifier, extensions);
                 BulkResponse2 result = await provider.ProcessAsync(request2).ConfigureAwait(false);
                 return result;
-                
+
             }
             catch (ArgumentException argumentException)
             {

@@ -2,12 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
     [DataContract]
     public sealed class PatchRequest2 : PatchRequest2Base<PatchOperation2Combined>
     {

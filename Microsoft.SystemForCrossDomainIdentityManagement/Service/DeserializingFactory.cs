@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System.Collections.Generic;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-
     public abstract class DeserializingFactory<TResource> :
             JsonDeserializingFactory<TResource>,
             IResourceJsonDeserializingFactory<TResource> where TResource : Resource, new()

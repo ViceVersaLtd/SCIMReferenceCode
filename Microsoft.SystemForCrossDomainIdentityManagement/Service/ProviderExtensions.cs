@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-
     public static class ProviderExtension
     {
         public static IReadOnlyCollection<IExtension> ReadExtensions(this IProvider provider)

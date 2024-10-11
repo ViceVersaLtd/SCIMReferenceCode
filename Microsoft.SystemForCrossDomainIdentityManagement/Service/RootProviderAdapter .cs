@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-
     internal class RootProviderAdapter : ProviderAdapterTemplate<Resource>
     {
         public RootProviderAdapter(IProvider provider)
@@ -24,7 +24,7 @@ namespace Microsoft.SCIM
         }
 
         public override Task<Resource> Create(
-            HttpRequestMessage request,
+            HttpRequest request,
             Resource resource,
             string correlationIdentifier)
         {
@@ -37,7 +37,7 @@ namespace Microsoft.SCIM
         }
 
         public override Task Delete(
-            HttpRequestMessage request,
+            HttpRequest request,
             string identifier,
             string correlationIdentifier)
         {
@@ -45,7 +45,7 @@ namespace Microsoft.SCIM
         }
 
         public override Task<Resource> Replace(
-            HttpRequestMessage request,
+            HttpRequest request,
             Resource resource, string
             correlationIdentifier)
         {
@@ -53,7 +53,7 @@ namespace Microsoft.SCIM
         }
 
         public override Task<Resource> Retrieve(
-            HttpRequestMessage request,
+            HttpRequest request,
             string identifier,
             IReadOnlyCollection<string> requestedAttributePaths,
             IReadOnlyCollection<string> excludedAttributePaths,
@@ -63,7 +63,7 @@ namespace Microsoft.SCIM
         }
 
         public override Task Update(
-            HttpRequestMessage request,
+            HttpRequest request,
             string identifier,
             PatchRequestBase patchRequest,
             string correlationIdentifier)

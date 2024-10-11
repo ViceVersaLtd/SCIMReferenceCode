@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Globalization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Globalization;
-
     // Refer to https://en.wikipedia.org/wiki/Unix_time
     public class UnixTime : IUnixTime
     {

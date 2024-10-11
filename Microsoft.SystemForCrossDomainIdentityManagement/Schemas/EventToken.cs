@@ -2,15 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using Microsoft.IdentityModel.Tokens;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Linq;
-    using Microsoft.IdentityModel.Tokens;
-
     // Implements https://tools.ietf.org/html/draft-ietf-secevent-token
     public class EventToken : IEventToken
     {

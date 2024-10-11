@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
     public sealed class Core2EnterpriseUserJsonDeserializingFactory :
         JsonDeserializingFactory<Core2EnterpriseUser>
     {

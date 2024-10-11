@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Globalization;
+using System.Threading;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Globalization;
-    using System.Threading;
-
     public sealed class ConsoleMonitor : IMonitor
     {
         private const string PrefixTemplate = "{0}{1}<{2}>";

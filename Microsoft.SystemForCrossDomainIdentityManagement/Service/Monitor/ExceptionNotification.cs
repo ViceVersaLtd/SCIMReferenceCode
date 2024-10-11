@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+
 namespace Microsoft.SCIM
 {
-    using System;
-
     public sealed class ExceptionNotification : Notification<Exception>, IExceptionNotification
     {
         public ExceptionNotification(Exception payload, bool critical)

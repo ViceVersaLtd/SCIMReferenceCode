@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Net;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Net;
-
     internal class BulkDeletionOperationState : BulkOperationStateBase<IResourceIdentifier>
     {
         public BulkDeletionOperationState(

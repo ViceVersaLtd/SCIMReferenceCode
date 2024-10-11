@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Globalization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Globalization;
-
     internal static class DateTimeExtension
     {
         private const string FormatStringRoundtrip = "O";

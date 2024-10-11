@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
-
     public static class ProtocolConstants
     {
         public const string ContentType = "application/scim+json";

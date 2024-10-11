@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IdentityModel.Tokens.Jwt;
-
     public abstract class EventTokenDecorator : IEventToken
     {
         protected EventTokenDecorator(IEventToken innerToken)

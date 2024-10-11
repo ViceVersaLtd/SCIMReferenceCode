@@ -2,13 +2,13 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Newtonsoft.Json;
-
     public static class Core2EnterpriseUserExtensions
     {
         public static void Apply(this Core2EnterpriseUser user, PatchRequest2Base<PatchOperation2> patch)

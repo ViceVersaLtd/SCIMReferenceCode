@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-
     internal class UniformResourceIdentifier : IUniformResourceIdentifier
     {
         private const string AlternatePathTemplate = UniformResourceIdentifier.RegularExpressionOperatorOr + "{0}";

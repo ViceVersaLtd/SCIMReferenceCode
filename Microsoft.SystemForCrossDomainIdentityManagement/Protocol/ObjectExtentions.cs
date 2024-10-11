@@ -2,13 +2,13 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Linq;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-
     public static class ObjectExtentions
     {
         public static bool IsResourceType(this object json, string scheme)

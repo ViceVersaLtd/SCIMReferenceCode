@@ -2,15 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Threading;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Json;
-    using System.Threading;
-
     public abstract class JsonDeserializingFactory<TDataContract> : IJsonNormalizationBehavior
     {
         private static readonly Lazy<DataContractJsonSerializerSettings> JsonSerializerSettings =

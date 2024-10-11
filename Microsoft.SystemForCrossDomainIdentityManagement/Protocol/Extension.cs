@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using Microsoft.AspNetCore.Http;
+using System;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Net.Http;
-
     public abstract class Extension : IExtension
     {
         private const string ArgumentNameController = "controller";
@@ -74,7 +74,7 @@ namespace Microsoft.SCIM
             private set;
         }
 
-        public virtual bool Supports(HttpRequestMessage request)
+        public virtual bool Supports(HttpRequest request)
         {
             if (request == null)
             {
@@ -82,9 +82,7 @@ namespace Microsoft.SCIM
             }
 
             bool result =
-                request.RequestUri?.AbsolutePath?.EndsWith(
-                       this.Path,
-                       StringComparison.OrdinalIgnoreCase) == true;
+                request.GetUri()?.AbsolutePath?.EndsWith(this.Path, StringComparison.OrdinalIgnoreCase) == true;
 
             return result;
         }

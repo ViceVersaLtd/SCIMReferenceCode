@@ -1,11 +1,11 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Net;
+using System.Net.Http;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Net;
-    using System.Net.Http;
-
     internal class HttpStringResponseExceptionFactory : HttpResponseExceptionFactory<string>
     {
         private const string ArgumentNameContent = "content";

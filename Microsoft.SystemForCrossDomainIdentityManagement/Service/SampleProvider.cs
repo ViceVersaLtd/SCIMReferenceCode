@@ -1,16 +1,16 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-    using Newtonsoft.Json;
-
     public sealed class SampleProvider : ProviderBase, ISampleProvider
     {
         public const string ElectronicMailAddressHome = "babs@jensen.org";
@@ -79,10 +79,10 @@ namespace Microsoft.SCIM
 
             this.sampleElectronicMailAddresses =
                 new ElectronicMailAddress[]
-                    {
-                        this.sampleElectronicMailAddressHome,
-                        this.sampleElectronicMailAddressWork
-                    };
+                {
+                    this.sampleElectronicMailAddressHome,
+                    this.sampleElectronicMailAddressWork
+                };
 
             this.sampleManager =
                 new Manager()

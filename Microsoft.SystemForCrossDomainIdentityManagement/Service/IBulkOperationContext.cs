@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Net.Http;
+
 namespace Microsoft.SCIM
 {
-    using System.Net.Http;
-
     public interface IBulkOperationContext : IBulkOperationState
     {
         bool Completed { get; }

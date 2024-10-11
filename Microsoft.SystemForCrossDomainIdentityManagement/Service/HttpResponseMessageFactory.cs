@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System.Net;
+using System.Net.Http;
+
 namespace Microsoft.SCIM
 {
-    using System.Net;
-    using System.Net.Http;
-
     internal abstract class HttpResponseMessageFactory<T>
     {
         public abstract HttpContent ProvideContent(T content);

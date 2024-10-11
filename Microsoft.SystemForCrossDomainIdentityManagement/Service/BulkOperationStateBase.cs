@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    
     internal abstract class BulkOperationStateBase<TPayload> : IBulkOperationState<TPayload> where TPayload : class
     {
         protected BulkOperationStateBase(

@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-
     public static class RequestExtensions
     {
         private const string SegmentInterface =
@@ -24,24 +24,24 @@ namespace Microsoft.SCIM
                     SegmentSeparator.ToArray());
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Justification = "False analysis of the 'this' parameter of an extension method")]
-        public static Uri GetBaseResourceIdentifier(this HttpRequestMessage request)
+        public static Uri GetBaseResourceIdentifier(this HttpRequest request)
         {
-            if (null == request.RequestUri)
+            if (null == request.GetUri())
             {
                 throw new ArgumentException(SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidRequest);
             }
 
             string lastSegment =
-                request.RequestUri.AbsolutePath.Split(
+                request.GetUri().AbsolutePath.Split(
                     RequestExtensions.SegmentSeparators.Value,
                     StringSplitOptions.RemoveEmptyEntries)
                 .Last();
             if (string.Equals(lastSegment, SchemaConstants.PathInterface, StringComparison.OrdinalIgnoreCase))
             {
-                return request.RequestUri;
+                return request.GetUri();
             }
 
-            string resourceIdentifier = request.RequestUri.AbsoluteUri;
+            string resourceIdentifier = request.GetUri().AbsoluteUri;
 
             int indexInterface =
                 resourceIdentifier
@@ -59,11 +59,50 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        public static bool TryGetRequestIdentifier(this HttpRequestMessage request, out string requestIdentifier)
+        public static bool TryGetRequestIdentifier(this HttpRequest request, out string requestIdentifier)
         {
-            request?.Headers.TryGetValues("client-id", out IEnumerable<string> _);
+            request.Headers.TryGetValue("client-id", out var _);
             requestIdentifier = Guid.NewGuid().ToString();
             return true;
+        }
+        public static Uri GetUri(this HttpRequest request)
+        {
+            var builder = new UriBuilder
+            {
+                Scheme = request.Scheme,
+                Host = request.Host.Value,
+                Path = request.Path,
+                Query = request.QueryString.ToUriComponent()
+            };
+            return builder.Uri;
+        }
+        public class HttpResponseException : Exception
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="HttpResponseException"/> class.
+            /// </summary>
+            /// <param name="statusCode">The status code of the response.</param>
+            public HttpResponseException(HttpStatusCode statusCode) : this(new HttpResponseMessage(statusCode))
+            {
+            }
+            /// <summary>
+            /// Initializes a new instance of the <see cref="HttpResponseException"/> class.
+            /// </summary>
+            /// <param name="response">The response message.</param>
+            public HttpResponseException(HttpResponseMessage response)
+            {
+                if (response == null)
+                {
+                    throw new ArgumentNullException(nameof(response));
+                }
+
+                Response = response;
+            }
+
+            /// <summary>
+            /// Gets the <see cref="HttpResponseMessage"/> to return to the client.
+            /// </summary>
+            public HttpResponseMessage Response { get; private set; }
         }
 
         private static void Relate(
@@ -116,9 +155,9 @@ namespace Microsoft.SCIM
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-                   
+
         }
-        
+
 
         private static void Enlist(
             this IRequest<BulkRequest2> request,
@@ -191,7 +230,7 @@ namespace Microsoft.SCIM
             {
                 IBulkOperationContext context = new BulkDeletionOperationContext(request, operation);
                 operations.Add(context);
-                return; 
+                return;
             }
 
             if (ProtocolExtensions.PatchMethod == operation.Method)

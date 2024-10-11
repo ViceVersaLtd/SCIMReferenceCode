@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     internal static class DictionaryExtension
     {
         public static void Trim(this IDictionary<string, object> dictionary)

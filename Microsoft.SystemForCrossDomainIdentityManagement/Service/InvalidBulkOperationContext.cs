@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Net.Http;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Net.Http;
-
     internal class InvalidBulkOperationContext : IBulkOperationContext
     {
         private readonly IBulkOperationState state;

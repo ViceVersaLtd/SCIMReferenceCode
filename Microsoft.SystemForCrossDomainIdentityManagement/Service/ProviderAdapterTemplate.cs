@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-
     public abstract class ProviderAdapterTemplate<T> : IProviderAdapter<T> where T : Resource
     {
         protected ProviderAdapterTemplate(IProvider provider)
@@ -22,7 +22,7 @@ namespace Microsoft.SCIM
 
         public abstract string SchemaIdentifier { get; }
 
-        public virtual async Task<Resource> Create(HttpRequestMessage request, Resource resource, string correlationIdentifier)
+        public virtual async Task<Resource> Create(HttpRequest request, Resource resource, string correlationIdentifier)
         {
             if (null == request)
             {
@@ -61,7 +61,7 @@ namespace Microsoft.SCIM
             return result;
         }
 
-        public virtual async Task Delete(HttpRequestMessage request, string identifier, string correlationIdentifier)
+        public virtual async Task Delete(HttpRequest request, string identifier, string correlationIdentifier)
         {
             if (null == request)
             {
@@ -85,7 +85,7 @@ namespace Microsoft.SCIM
             await this.Provider.DeleteAsync(deletionRequest).ConfigureAwait(false);
         }
 
-        public virtual string GetPath(HttpRequestMessage request)
+        public virtual string GetPath(HttpRequest request)
         {
             IReadOnlyCollection<IExtension> extensions = this.ReadExtensions();
             if (extensions != null && extensions.TryGetPath(this.SchemaIdentifier, out string result))
@@ -98,7 +98,7 @@ namespace Microsoft.SCIM
         }
 
         public virtual async Task<QueryResponseBase> Query(
-            HttpRequestMessage request,
+            HttpRequest request,
             IReadOnlyCollection<IFilter> filters,
             IReadOnlyCollection<string> requestedAttributePaths,
             IReadOnlyCollection<string> excludedAttributePaths,
@@ -152,7 +152,7 @@ namespace Microsoft.SCIM
         }
 
         public virtual async Task<Resource> Replace(
-            HttpRequestMessage request,
+            HttpRequest request,
             Resource resource,
             string correlationIdentifier)
         {
@@ -178,7 +178,7 @@ namespace Microsoft.SCIM
         }
 
         public virtual async Task<Resource> Retrieve(
-            HttpRequestMessage request,
+            HttpRequest request,
             string identifier,
             IReadOnlyCollection<string> requestedAttributePaths,
             IReadOnlyCollection<string> excludedAttributePaths,
@@ -220,7 +220,7 @@ namespace Microsoft.SCIM
         }
 
         public virtual async Task Update(
-            HttpRequestMessage request,
+            HttpRequest request,
             string identifier,
             PatchRequestBase patchRequest,
             string correlationIdentifier)

@@ -1,16 +1,16 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net.Http;
-
     public abstract class SystemForCrossDomainIdentityManagementRequest<TPayload> : IRequest<TPayload>
         where TPayload : class
     {
         protected SystemForCrossDomainIdentityManagementRequest(
-            HttpRequestMessage request,
+            HttpRequest request,
             TPayload payload,
             string correlationIdentifier,
             IReadOnlyCollection<IExtension> extensions)
@@ -56,7 +56,7 @@ namespace Microsoft.SCIM
             private set;
         }
 
-        public HttpRequestMessage Request
+        public HttpRequest Request
         {
             get;
             private set;

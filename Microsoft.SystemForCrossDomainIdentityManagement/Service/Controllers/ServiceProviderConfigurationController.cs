@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Net;
-    using System.Net.Http;
-    using System.Web.Http;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     [Route(ServiceConstants.RouteServiceConfiguration)]
     [Authorize]
     [ApiController]
@@ -25,7 +25,7 @@ namespace Microsoft.SCIM
 
             try
             {
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);

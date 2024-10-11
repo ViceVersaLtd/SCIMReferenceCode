@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Text;
+using System.Text.RegularExpressions;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
     internal static class StringExtension
     {
         private const string PatternEscapedDoubleQuote = @"\\*" + StringExtension.QuoteDouble;

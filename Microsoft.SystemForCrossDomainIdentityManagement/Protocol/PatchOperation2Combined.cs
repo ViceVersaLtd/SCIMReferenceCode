@@ -2,15 +2,14 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Runtime.Serialization;
-    using Newtonsoft.Json;
-
     [DataContract]
     public sealed class PatchOperation2Combined : PatchOperation2Base
     {

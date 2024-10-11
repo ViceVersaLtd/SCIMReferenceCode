@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-    using System.Net.Http;
-
     public sealed class UpdateRequest :
         SystemForCrossDomainIdentityManagementRequest<IPatch>
     {
         public UpdateRequest(
-            HttpRequestMessage request,
+            HttpRequest request,
             IPatch payload,
             string correlationIdentifier,
             IReadOnlyCollection<IExtension> extensions)

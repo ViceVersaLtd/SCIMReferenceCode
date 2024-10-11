@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+
 namespace Microsoft.SCIM
 {
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
     [DataContract]
     public abstract class GroupBase : Resource
     {

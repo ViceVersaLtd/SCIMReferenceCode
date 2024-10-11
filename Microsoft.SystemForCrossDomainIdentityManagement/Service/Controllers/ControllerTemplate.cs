@@ -1,17 +1,16 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using static Microsoft.SCIM.RequestExtensions;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using System.Web.Http;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
-
     public abstract class ControllerTemplate : ControllerBase
     {
         internal const string AttributeValueIdentifier = "{identifier}";
@@ -42,20 +41,13 @@ namespace Microsoft.SCIM
                 this.Response.Headers.Add(ControllerTemplate.HeaderKeyContentType, ProtocolConstants.ContentType);
             }
 
-            Uri baseResourceIdentifier = this.ConvertRequest().GetBaseResourceIdentifier();
+            Uri baseResourceIdentifier = this.HttpContext.Request.GetBaseResourceIdentifier();
             Uri resourceIdentifier = resource.GetResourceIdentifier(baseResourceIdentifier);
             string resourceLocation = resourceIdentifier.AbsoluteUri;
             if (!this.Response.Headers.ContainsKey(ControllerTemplate.HeaderKeyLocation))
             {
                 this.Response.Headers.Add(ControllerTemplate.HeaderKeyLocation, resourceLocation);
             }
-        }
-
-        protected HttpRequestMessage ConvertRequest()
-        {
-            HttpRequestMessageFeature hreqmf = new HttpRequestMessageFeature(this.HttpContext);
-            HttpRequestMessage result = hreqmf.HttpRequestMessage;
-            return result;
         }
 
         protected ObjectResult ScimError(HttpStatusCode httpStatusCode, string message)
@@ -103,7 +95,7 @@ namespace Microsoft.SCIM
                 }
 
                 identifier = Uri.UnescapeDataString(identifier);
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);
@@ -187,13 +179,13 @@ namespace Microsoft.SCIM
             string correlationIdentifier = null;
             try
             {
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);
                 }
 
-                IResourceQuery resourceQuery = new ResourceQuery(request.RequestUri);
+                IResourceQuery resourceQuery = new ResourceQuery(request.GetUri());
                 IProviderAdapter<T> provider = this.AdaptProvider();
                 QueryResponseBase result =
                     await provider
@@ -284,7 +276,7 @@ namespace Microsoft.SCIM
 
         [HttpGet(ControllerTemplate.AttributeValueIdentifier)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "The names of the methods of a controller must correspond to the names of hypertext markup verbs")]
-        public virtual async Task<IActionResult> Get([FromUri]string identifier)
+        public virtual async Task<IActionResult> Get(string identifier)
         {
             string correlationIdentifier = null;
             try
@@ -294,13 +286,13 @@ namespace Microsoft.SCIM
                     return this.ScimError(HttpStatusCode.BadRequest, SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidIdentifier);
                 }
 
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);
                 }
 
-                IResourceQuery resourceQuery = new ResourceQuery(request.RequestUri);
+                IResourceQuery resourceQuery = new ResourceQuery(request.GetUri());
                 if (resourceQuery.Filters.Any())
                 {
                     if (resourceQuery.Filters.Count != 1)
@@ -458,7 +450,7 @@ namespace Microsoft.SCIM
                     return this.BadRequest();
                 }
 
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);
@@ -567,7 +559,7 @@ namespace Microsoft.SCIM
                     return this.BadRequest();
                 }
 
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);
@@ -670,7 +662,7 @@ namespace Microsoft.SCIM
                     return this.ScimError(HttpStatusCode.BadRequest, SystemForCrossDomainIdentityManagementServiceResources.ExceptionInvalidIdentifier);
                 }
 
-                HttpRequestMessage request = this.ConvertRequest();
+                HttpRequest request = this.HttpContext.Request;
                 if (!request.TryGetRequestIdentifier(out correlationIdentifier))
                 {
                     throw new HttpResponseException(HttpStatusCode.InternalServerError);

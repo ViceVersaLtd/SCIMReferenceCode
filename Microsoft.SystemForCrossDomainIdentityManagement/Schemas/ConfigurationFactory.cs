@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+
 namespace Microsoft.SCIM
 {
-    using System;
-
     public abstract class ConfigurationFactory<TConfiguration, TException>
         where TException : Exception
     {

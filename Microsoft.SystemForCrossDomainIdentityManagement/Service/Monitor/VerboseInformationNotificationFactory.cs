@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation.// Licensed under the MIT license.
 
+using System;
+
 namespace Microsoft.SCIM
 {
-    using System;
-
     public sealed class VerboseInformationNotificationFactory : NotificationFactoryBase<IInformationNotification>
     {
         private static readonly Lazy<NotificationFactoryBase<IInformationNotification>> Singleton =

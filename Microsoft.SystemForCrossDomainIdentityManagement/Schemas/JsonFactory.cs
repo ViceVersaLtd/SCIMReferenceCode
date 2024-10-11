@@ -2,12 +2,12 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
 namespace Microsoft.SCIM
 {
-    using System;
-    using System.Collections.Generic;
-    using Newtonsoft.Json;
-
     public abstract class JsonFactory
     {
         private static readonly Lazy<JsonFactory> LargeObjectFactory =
